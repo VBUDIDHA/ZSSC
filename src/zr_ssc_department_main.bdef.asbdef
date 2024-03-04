@@ -1,0 +1,45 @@
+managed implementation in class ZBP_R_SSC_DEPARTMENT_MAIN unique;
+strict ( 2 );
+with draft;
+define behavior for ZR_SSC_DEPARTMENT_MAIN alias DepartmentMain
+persistent table zssc_department
+draft table ZSSC_DEPT_MAIN_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+
+{
+  field ( mandatory : create )
+   ZzEmpID,
+   ZzDeptID;
+
+  field ( readonly )
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   ZzEmpID,
+   ZzDeptID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZSSC_DEPARTMENT
+  {
+    ZzEmpID = zz_emp_id;
+    ZzDeptID = zz_dept_id;
+    ZzDeptName = zz_dept_name;
+    ZzWbs = zz_wbs;
+    ZzBuilding = zz_building;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

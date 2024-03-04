@@ -1,0 +1,103 @@
+projection;
+strict ( 2 );
+use draft;
+
+/***********************************************************************************/
+/* (Master) Employees behavior - Projection */
+/***********************************************************************************/
+
+define behavior for ZC_SSC_EMPLOYEE alias Employee
+use etag
+
+{
+
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _KeyDeliver { create; with draft; }
+  use association _Leave { create; with draft; }
+  //  use association _POrder { create; with draft; }
+  //  use association _Salary { create; with draft; }
+  //  use association _Department { create; with draft; }
+
+  use association _POrder;
+  use association _Salary;
+  use association _Department;
+}
+
+/***********************************************************************************/
+/* Key Deliverables behavior - Projection */
+/***********************************************************************************/
+
+define behavior for zc_ssc_key_deliver alias KeyDeliver
+use etag
+
+{
+  use update;
+  use delete;
+
+  use association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Leaves behavior - Projection */
+/***********************************************************************************/
+
+define behavior for ZC_SSC_LEAVE alias Leave
+use etag
+
+{
+  use update;
+  use delete;
+
+  use association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Purchase Order behavior - Projection */
+/***********************************************************************************/
+
+define behavior for ZC_SSC_P_ORDER alias POrder
+use etag
+
+{
+  //  use update;
+  //  use delete;
+
+  use association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Salary behavior - Projection */
+/***********************************************************************************/
+
+define behavior for ZC_SSC_SALARY alias Salary
+use etag
+
+{
+  //  use update;
+  //  use delete;
+
+  use association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Department behavior - Projection */
+/***********************************************************************************/
+
+define behavior for ZC_SSC_DEPARTMENT alias Department
+use etag
+
+{
+  //  use update;
+  //  use delete;
+
+  use association _Employee { with draft; }
+}

@@ -1,0 +1,9 @@
+@EndUserText.label: 'Service definition for ZC_SSC_EMPLOYEE'
+define service ZUI_SSC_EMPLOYEE_O4 {
+  expose ZC_SSC_EMPLOYEE    as Employee;
+  expose zc_ssc_key_deliver as KeyDeliver;
+  expose ZC_SSC_LEAVE       as Leave;
+  expose ZC_SSC_P_ORDER     as POrder;
+  expose ZC_SSC_SALARY      as Salary;
+  expose ZC_SSC_DEPARTMENT  as Department;
+}

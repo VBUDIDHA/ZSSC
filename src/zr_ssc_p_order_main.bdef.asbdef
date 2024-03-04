@@ -1,0 +1,47 @@
+managed implementation in class ZBP_R_SSC_P_ORDER_MAIN unique;
+strict ( 2 );
+with draft;
+define behavior for ZR_SSC_P_ORDER_MAIN alias POrderMain
+persistent table zssc_p_order
+draft table ZSSC_P_ORDEMAI_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+
+{
+  field ( mandatory : create )
+   ZzEmpID,
+   ZzPoNo;
+
+  field ( readonly )
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   ZzEmpID,
+   ZzPoNo;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZSSC_P_ORDER
+  {
+    ZzEmpID = zz_emp_id;
+    ZzPoNo = zz_po_no;
+    ZzExpDate = zz_exp_date;
+    ZzValidHrs = zz_valid_hrs;
+    ZzBillrate = zz_billrate;
+    ZzCurrency = zz_currency;
+    ZzPoOwner = zz_po_owner;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

@@ -1,0 +1,61 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+@UI: {
+  headerInfo: { typeName: 'Salary',
+                typeNamePlural: 'Salaries',
+                title: { type: #STANDARD, value: 'Income' }
+                } }
+
+annotate view ZC_SSC_SALARY with
+{
+  @UI.facet: [{ id: 'Salary',
+          purpose: #STANDARD,
+          type: #IDENTIFICATION_REFERENCE,
+          label: 'Employee Salary',
+          position: 10
+        } ]
+
+  @UI: {
+       lineItem: [{ position: 10, importance: #HIGH }],
+       identification: [{ position: 10, label: 'Employee ID' }]
+      }
+  @Search.defaultSearchElement: true
+  EmployeeID;
+
+  @UI: {
+        lineItem: [{ position: 20, importance: #HIGH }],
+        identification: [{ position: 20, label: 'PO Number' }]
+       }
+
+  @Search.defaultSearchElement: true
+  PONumber;
+
+  @UI: {
+      lineItem: [{ position: 30, importance: #HIGH }],
+      identification: [{ position: 30, label: 'Income' }]
+     }
+  Income;
+
+  @UI: {
+      lineItem: [{ position: 40, importance: #HIGH }],
+      identification: [{ position: 40, label: 'Currency' }]
+     }
+  Currency;
+
+  @UI: {
+     lineItem: [{ position: 50, importance: #HIGH }],
+     identification: [{ position: 50, label: 'Leaves Taken' }]
+    }
+  LeavesTaken;
+
+  @UI: {
+   lineItem: [{ position: 60, importance: #HIGH }],
+   identification: [{ position: 60, label: 'Leaves Available' }]
+  }
+  LeavesAvailable;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+}

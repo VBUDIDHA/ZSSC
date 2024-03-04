@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for ZC_SSC_LEAVES_MAIN'
+define service ZUI_SSC_LEAVES_MAIN_O4 {
+  expose ZC_SSC_LEAVES_MAIN as LeavesMain;
+}

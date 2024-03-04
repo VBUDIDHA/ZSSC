@@ -1,0 +1,47 @@
+managed implementation in class ZBP_R_SSC_LEAVES_MAIN unique;
+strict ( 2 );
+with draft;
+define behavior for ZR_SSC_LEAVES_MAIN alias LeavesMain
+persistent table zssc_leaves
+draft table ZSSC_LEAVESMAI_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+
+{
+  field ( mandatory : create )
+   ZzEmpID,
+   ZzLeaveReq;
+
+  field ( readonly )
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   ZzEmpID,
+   ZzLeaveReq;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZSSC_LEAVES
+  {
+    ZzEmpID = zz_emp_id;
+    ZzLeaveReq = zz_leave_req;
+    ZzLeaveType = zz_leave_type;
+    ZzNoDays = zz_no_days;
+    ZzFromDate = zz_from_date;
+    ZzToDate = zz_to_date;
+    ZzReason = zz_reason;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

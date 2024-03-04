@@ -1,0 +1,93 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+@UI: {
+  headerInfo: { typeName: 'Employee',
+                typeNamePlural: 'Employees',
+                title: { type: #STANDARD, label: 'Employee ID', value: 'EmployeeID' } } }
+
+annotate view ZC_SSC_EMPLOYEE with
+{
+  @UI.facet: [{ id: 'Employee',
+                purpose: #STANDARD,
+                type: #IDENTIFICATION_REFERENCE,
+                label: 'Employee',
+                position: 10
+              },
+              { id: 'KeyDeliver',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Key Deliverables',
+                position: 20,
+                targetElement: '_KeyDeliver',
+                 isPartOfPreview: true
+              },
+              { id: 'Leave',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Leave',
+                position: 30,
+                targetElement: '_Leave'
+              },
+              { id: 'POrder',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Purchase Order',
+                position: 40,
+                targetElement: '_POrder'
+              },
+              { id: 'Salary',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Salary',
+                position: 50,
+                targetElement: '_Salary'
+              },
+              { id: 'Department',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Department',
+                position: 60,
+                targetElement: '_Department'
+              }
+             ]
+  @UI: {
+        lineItem: [{ position: 10, importance: #HIGH }],
+        identification: [{ position: 10, label: 'Employee ID' }]
+       }
+  @Search.defaultSearchElement: true
+  EmployeeID;
+
+  @UI: {
+        lineItem: [{ position: 20, importance: #HIGH }],
+        identification: [{ position: 20, label: 'Department ID' }]
+       }
+  DepartmentID;
+
+  @UI: {
+      lineItem: [{ position: 30, importance: #HIGH }],
+      identification: [{ position: 30, label: 'First Name' }]
+     }
+  FirstName;
+
+  @UI: {
+      lineItem: [{ position: 40, importance: #HIGH }],
+      identification: [{ position: 40, label: 'Last Name' }]
+     }
+  LastName;
+
+  @UI: {
+      lineItem: [{ position: 50, importance: #HIGH }],
+      identification: [{ position: 50, label: 'Date of Birth' }]
+     }
+  Dob;
+
+  @UI: {
+      lineItem: [{ position: 60, importance: #HIGH }],
+      identification: [{ position: 60, label: 'Location' }]
+     }
+  Location;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

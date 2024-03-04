@@ -1,0 +1,246 @@
+managed implementation in class ZBP_CL_R_SSC_EMPLOYEE unique;
+strict ( 2 );
+with draft;
+
+/***********************************************************************************/
+/* (Master) Employees behavior - Managed */
+/***********************************************************************************/
+
+define behavior for ZR_SSC_EMPLOYEE alias Employee
+persistent table zssc_employee
+draft table zssc_employee_d                 //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+
+{
+  field ( mandatory : create )
+  EmployeeID;
+
+  field ( readonly )
+  CreatedAt,
+  CreatedBy,
+  LastChangedAt,
+  LocalLastChangedAt,
+  LastChangedBy;
+
+  field ( readonly : update )
+  EmployeeID;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zssc_employee
+    {
+      EmployeeID         = zz_emp_id;
+      DepartmentID       = zz_dept_id;
+      FirstName          = zz_first_name;
+      LastName           = zz_last_name;
+      Dob                = zz_dob;
+      Location           = zz_location;
+      CreatedAt          = created_at;
+      CreatedBy          = created_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+      LastChangedBy      = last_changed_by;
+    }
+
+  association _KeyDeliver { create; with draft; }
+  association _Leave { create; with draft; }
+//  association _POrder { create; with draft; }
+//  association _Salary { create; with draft; }
+//  association _Department { create; with draft; }
+
+    association _POrder;
+  association _Salary;
+  association _Department;
+
+}
+
+/***********************************************************************************/
+/* Key Deliverables behavior - Managed */
+/***********************************************************************************/
+
+define behavior for zr_ssc_key_deliver alias KeyDeliver
+persistent table zssc_key_deliver
+draft table zssc_key_del_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LastChangedAt
+lock dependent by _Employee
+authorization dependent by _Employee
+
+{
+  field ( readonly ) EmployeeID, LastChangedAt;
+
+  field ( mandatory : create )
+  UserStory;
+
+  field ( readonly : update )
+  UserStory;
+
+  update;
+  delete;
+
+  mapping for zssc_key_deliver
+    {
+      EmployeeID    = zz_emp_id;
+      UserStory     = zz_user_story;
+//      WeekNumber    = zz_wk_no;
+//      Description   = zz_desc;
+//      Status        = zz_status;
+//      //Remarks       = zz_remarks;
+//      Risk          = zz_risk;
+//      Milestone     = zz_milestone;
+      LastChangedAt = last_changed_at;
+    }
+  association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Leaves behavior - Managed */
+/***********************************************************************************/
+
+define behavior for zr_ssc_leaves alias Leave
+persistent table zssc_leaves
+draft table zssc_leaves_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LastChangedAt
+lock dependent by _Employee
+authorization dependent by _Employee
+
+{
+  field ( readonly ) EmployeeID, LastChangedAt;
+
+  field ( mandatory : create )
+  LeaveRequest;
+
+  field ( readonly : update )
+  LeaveRequest;
+
+  update;
+  delete;
+
+  mapping for zssc_leaves
+    {
+      EmployeeID       = zz_emp_id;
+      LeaveRequest     = zz_leave_req;
+      LeaveRequestType = zz_leave_type;
+      NoDays           = zz_no_days;
+      FromDate         = zz_from_date;
+      ToDate           = zz_to_date;
+      Reason           = zz_reason;
+      LastChangedAt    = last_changed_at;
+    }
+
+  association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Purchase Order behavior - Managed */
+/***********************************************************************************/
+
+define behavior for zr_ssc_p_order alias POrder
+persistent table zssc_p_order
+draft table zssc_p_order_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LastChangedAt
+lock dependent by _Employee
+authorization dependent by _Employee
+
+{
+  field ( readonly ) EmployeeID, LastChangedAt;
+//
+//  field ( mandatory : create )
+//  PONumber;
+//
+//  field ( readonly : update )
+//  PONumber;
+//
+//  update;
+//  delete;
+
+  mapping for zssc_p_order
+    {
+      EmployeeID    = zz_emp_id;
+      PONumber      = zz_po_no;
+      ExpiryDate    = zz_exp_date;
+      ValidHours    = zz_valid_hrs;
+      Billrate      = zz_billrate;
+      Currency      = zz_currency;
+      PoOwner       = zz_po_owner;
+      LastChangedAt = last_changed_at;
+    }
+
+  association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Salary behavior - Managed */
+/***********************************************************************************/
+
+define behavior for zr_ssc_salary alias Salary
+persistent table zssc_salary
+draft table zssc_salary_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LastChangedAt
+lock dependent by _Employee
+authorization dependent by _Employee
+
+{
+  field ( readonly ) EmployeeID, PONumber, LastChangedAt;
+
+//  field ( mandatory : create )
+//  Income;
+//
+//  update;
+//  delete;
+
+  mapping for zssc_salary
+    {
+      EmployeeID      = zz_emp_id;
+      PONumber        = zz_po_no;
+      Income          = zz_income;
+      Currency        = zz_currency;
+      LeavesTaken     = zz_leaves_taken;
+      LeavesAvailable = zz_leave_available;
+      LastChangedAt   = last_changed_at;
+    }
+
+  association _Employee { with draft; }
+}
+
+/***********************************************************************************/
+/* Department behavior - Managed */
+/***********************************************************************************/
+
+define behavior for zr_ssc_department alias Department
+persistent table zssc_department
+draft table zssc_dept_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
+etag master LastChangedAt
+lock dependent by _Employee
+authorization dependent by _Employee
+
+{
+  field ( readonly ) EmployeeID, DepartmentID, LastChangedAt;
+
+//  field ( mandatory : create )
+//  DepartmentName;
+//
+//  update;
+//  delete;
+
+  mapping for zssc_department
+    {
+      EmployeeID     = zz_emp_id;
+      DepartmentID   = zz_dept_id;
+      DepartmentName = zz_dept_name;
+      Wbs            = zz_wbs;
+      Building       = zz_building;
+      LastChangedAt  = last_changed_at;
+    }
+
+  association _Employee { with draft; }
+}

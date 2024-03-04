@@ -1,0 +1,76 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+@UI: {
+  headerInfo: { typeName: 'Key Deliverable',
+                typeNamePlural: 'Key DeliverableS',
+                title: { type: #STANDARD, value: 'UserStory' }
+                } }
+
+annotate view zc_ssc_key_deliver with
+{
+  @UI.facet: [{ id: 'KeyDeliver',
+              purpose: #STANDARD,
+              type: #IDENTIFICATION_REFERENCE,
+              label: 'Key Deliverable',
+              position: 10
+            } ]
+
+  //  @UI: {
+  //       lineItem: [{ position: 10, importance: #HIGH }],
+  //       identification: [{ position: 10, label: 'Employee ID' }]
+  //      }
+  //  @Search.defaultSearchElement: true
+  @UI.hidden: true
+  EmployeeID;
+
+  @UI: {
+      lineItem: [{ position: 11, importance: #HIGH }],
+      identification: [{ position: 11, label: 'Week No.' }]
+     }
+
+  @Search.defaultSearchElement: true
+  WeekNumber;
+
+  @UI: {
+        lineItem: [{ position: 20, importance: #HIGH }],
+        identification: [{ position: 20, label: 'User Story' }]
+       }
+
+  @Search.defaultSearchElement: true
+  UserStory;
+
+  @UI: {
+      lineItem: [{ position: 30, importance: #HIGH }],
+      identification: [{ position: 30, label: 'Description' }]
+     }
+  Description;
+
+  @UI: {
+      lineItem: [{ position: 40, importance: #HIGH }],
+      identification: [{ position: 40, label: 'Status' }]
+     }
+  Status;
+
+  @UI: {
+      lineItem: [{ position: 50, importance: #HIGH }],
+      identification: [{ position: 50, label: 'Remarks' }]
+     }
+  Remarks;
+
+  @UI: {
+      lineItem: [{ position: 60, importance: #HIGH }],
+      identification: [{ position: 60, label: 'Risk' }]
+     }
+  Risk;
+
+  @UI: {
+     lineItem: [{ position: 70, importance: #HIGH }],
+     identification: [{ position: 70, label: 'Milestone' }]
+    }
+  Milestone;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+}
