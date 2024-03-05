@@ -4,6 +4,6 @@ define service ZUI_SSC_EMPLOYEE_O4 {
   expose zc_ssc_key_deliver as KeyDeliver;
   expose ZC_SSC_LEAVE       as Leave;
   expose ZC_SSC_P_ORDER     as POrder;
-  expose ZC_SSC_SALARY      as Salary;
   expose ZC_SSC_DEPARTMENT  as Department;
+  expose ZC_SSC_SALARY      as Salary;
 }

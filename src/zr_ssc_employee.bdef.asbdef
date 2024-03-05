@@ -54,11 +54,11 @@ authorization master ( global )
 
   association _KeyDeliver { create; with draft; }
   association _Leave { create; with draft; }
-//  association _POrder { create; with draft; }
-//  association _Salary { create; with draft; }
-//  association _Department { create; with draft; }
+  //  association _POrder { create; with draft; }
+  //  association _Salary { create; with draft; }
+  //  association _Department { create; with draft; }
 
-    association _POrder;
+  association _POrder;
   association _Salary;
   association _Department;
 
@@ -91,12 +91,12 @@ authorization dependent by _Employee
     {
       EmployeeID    = zz_emp_id;
       UserStory     = zz_user_story;
-//      WeekNumber    = zz_wk_no;
-//      Description   = zz_desc;
-//      Status        = zz_status;
-//      //Remarks       = zz_remarks;
-//      Risk          = zz_risk;
-//      Milestone     = zz_milestone;
+            WeekNumber    = zz_wk_no;
+            Description   = zz_desc;
+            Status        = zz_status;
+            //Remarks       = zz_remarks;
+            Risk          = zz_risk;
+            Milestone     = zz_milestone;
       LastChangedAt = last_changed_at;
     }
   association _Employee { with draft; }
@@ -153,15 +153,15 @@ authorization dependent by _Employee
 
 {
   field ( readonly ) EmployeeID, LastChangedAt;
-//
-//  field ( mandatory : create )
-//  PONumber;
-//
-//  field ( readonly : update )
-//  PONumber;
-//
-//  update;
-//  delete;
+  //
+  //  field ( mandatory : create )
+  //  PONumber;
+  //
+  //  field ( readonly : update )
+  //  PONumber;
+  //
+  //  update;
+  //  delete;
 
   mapping for zssc_p_order
     {
@@ -192,11 +192,11 @@ authorization dependent by _Employee
 {
   field ( readonly ) EmployeeID, PONumber, LastChangedAt;
 
-//  field ( mandatory : create )
-//  Income;
-//
-//  update;
-//  delete;
+  //  field ( mandatory : create )
+  //  Income;
+  //
+  //  update;
+  //  delete;
 
   mapping for zssc_salary
     {
@@ -226,11 +226,11 @@ authorization dependent by _Employee
 {
   field ( readonly ) EmployeeID, DepartmentID, LastChangedAt;
 
-//  field ( mandatory : create )
-//  DepartmentName;
-//
-//  update;
-//  delete;
+  //  field ( mandatory : create )
+  //  DepartmentName;
+  //
+  //  update;
+  //  delete;
 
   mapping for zssc_department
     {

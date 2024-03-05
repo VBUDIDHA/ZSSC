@@ -20,7 +20,7 @@ annotate view ZC_SSC_EMPLOYEE with
                 label: 'Key Deliverables',
                 position: 20,
                 targetElement: '_KeyDeliver',
-                 isPartOfPreview: true
+                isPartOfPreview: true
               },
               { id: 'Leave',
                 purpose: #STANDARD,
@@ -36,19 +36,20 @@ annotate view ZC_SSC_EMPLOYEE with
                 position: 40,
                 targetElement: '_POrder'
               },
-              { id: 'Salary',
-                purpose: #STANDARD,
-                type: #LINEITEM_REFERENCE,
-                label: 'Salary',
-                position: 50,
-                targetElement: '_Salary'
-              },
               { id: 'Department',
                 purpose: #STANDARD,
                 type: #LINEITEM_REFERENCE,
                 label: 'Department',
-                position: 60,
+                position: 50,
                 targetElement: '_Department'
+              },
+              { id: 'Salary',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Salary',
+                position: 60,
+                targetElement: '_Salary',
+                isPartOfPreview: false
               }
              ]
   @UI: {
