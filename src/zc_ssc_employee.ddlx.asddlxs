@@ -14,34 +14,34 @@ annotate view ZC_SSC_EMPLOYEE with
                 label: 'Employee',
                 position: 10
               },
-              { id: 'KeyDeliver',
-                purpose: #STANDARD,
-                type: #LINEITEM_REFERENCE,
-                label: 'Key Deliverables',
-                position: 20,
-                targetElement: '_KeyDeliver',
-                isPartOfPreview: true
-              },
-              { id: 'Leave',
-                purpose: #STANDARD,
-                type: #LINEITEM_REFERENCE,
-                label: 'Leave',
-                position: 30,
-                targetElement: '_Leave'
-              },
-              { id: 'POrder',
-                purpose: #STANDARD,
-                type: #LINEITEM_REFERENCE,
-                label: 'Purchase Order',
-                position: 40,
-                targetElement: '_POrder'
-              },
-              { id: 'Department',
-                purpose: #STANDARD,
-                type: #LINEITEM_REFERENCE,
-                label: 'Department',
-                position: 50,
-                targetElement: '_Department'
+                { id: 'KeyDeliver',
+                  purpose: #STANDARD,
+                  type: #LINEITEM_REFERENCE,
+                  label: 'Key Deliverables',
+                  position: 20,
+                  targetElement: '_KeyDeliver',
+                  isPartOfPreview: true
+                },
+               { id: 'Leave',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Leave',
+                 position: 30,
+                 targetElement: '_Leave'
+               },
+               { id: 'POrder',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Purchase Order',
+                 position: 40,
+                 targetElement: '_POrder'
+               },
+               { id: 'Department',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Department',
+                 position: 50,
+                 targetElement: '_Department'
               },
               { id: 'Salary',
                 purpose: #STANDARD,
@@ -50,7 +50,7 @@ annotate view ZC_SSC_EMPLOYEE with
                 position: 60,
                 targetElement: '_Salary',
                 isPartOfPreview: false
-              }
+             }
              ]
   @UI: {
         lineItem: [{ position: 10, importance: #HIGH }],

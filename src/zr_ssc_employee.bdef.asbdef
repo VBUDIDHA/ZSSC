@@ -54,13 +54,9 @@ authorization master ( global )
 
   association _KeyDeliver { create; with draft; }
   association _Leave { create; with draft; }
-  //  association _POrder { create; with draft; }
-  //  association _Salary { create; with draft; }
-  //  association _Department { create; with draft; }
-
-  association _POrder;
-  association _Salary;
-  association _Department;
+  association _POrder { create; with draft; }
+  association _Salary { create; with draft; }
+  association _Department { create; with draft; }
 
 }
 
@@ -69,6 +65,7 @@ authorization master ( global )
 /***********************************************************************************/
 
 define behavior for zr_ssc_key_deliver alias KeyDeliver
+implementation in class ZBP_CL_R_SSC_KeyDeliver unique
 persistent table zssc_key_deliver
 draft table zssc_key_del_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
 etag master LastChangedAt
@@ -76,7 +73,7 @@ lock dependent by _Employee
 authorization dependent by _Employee
 
 {
-  field ( readonly ) EmployeeID, LastChangedAt;
+  field ( readonly ) EmployeeID, LastChangedAt, WeekNumber;
 
   field ( mandatory : create )
   UserStory;
@@ -91,15 +88,19 @@ authorization dependent by _Employee
     {
       EmployeeID    = zz_emp_id;
       UserStory     = zz_user_story;
-            WeekNumber    = zz_wk_no;
-            Description   = zz_desc;
-            Status        = zz_status;
-            //Remarks       = zz_remarks;
-            Risk          = zz_risk;
-            Milestone     = zz_milestone;
+      WeekNumber    = zz_wk_no;
+      Description   = zz_desc;
+      Status        = zz_status;
+      Remarks       = zz_remarks;
+      Risk          = zz_risk;
+      Milestone     = zz_milestone;
       LastChangedAt = last_changed_at;
     }
   association _Employee { with draft; }
+
+  //determine weeknumber automatically
+  determination SetWeekNumber on save { create; }
+
 }
 
 /***********************************************************************************/
@@ -107,6 +108,7 @@ authorization dependent by _Employee
 /***********************************************************************************/
 
 define behavior for zr_ssc_leaves alias Leave
+implementation in class ZBP_CL_R_SSC_LEAVE unique
 persistent table zssc_leaves
 draft table zssc_leaves_d  //Create this draft with Ctrl + 1 ( Quick Fix ) with the corresponding table
 etag master LastChangedAt
@@ -138,6 +140,9 @@ authorization dependent by _Employee
     }
 
   association _Employee { with draft; }
+
+   // Validation on Total Available Leaves
+  validation validateleavecount on save { create; field NoDays; }
 }
 
 /***********************************************************************************/
@@ -153,15 +158,15 @@ authorization dependent by _Employee
 
 {
   field ( readonly ) EmployeeID, LastChangedAt;
-  //
-  //  field ( mandatory : create )
-  //  PONumber;
-  //
-  //  field ( readonly : update )
-  //  PONumber;
-  //
-  //  update;
-  //  delete;
+
+  field ( mandatory : create )
+  PONumber;
+
+  field ( readonly : update )
+  PONumber;
+
+  update;
+  delete;
 
   mapping for zssc_p_order
     {
@@ -192,11 +197,11 @@ authorization dependent by _Employee
 {
   field ( readonly ) EmployeeID, PONumber, LastChangedAt;
 
-  //  field ( mandatory : create )
-  //  Income;
-  //
-  //  update;
-  //  delete;
+  field ( mandatory : create )
+  Income;
+
+  update;
+  delete;
 
   mapping for zssc_salary
     {
@@ -226,11 +231,11 @@ authorization dependent by _Employee
 {
   field ( readonly ) EmployeeID, DepartmentID, LastChangedAt;
 
-  //  field ( mandatory : create )
-  //  DepartmentName;
-  //
-  //  update;
-  //  delete;
+  field ( mandatory : create )
+  DepartmentName;
+
+  update;
+  delete;
 
   mapping for zssc_department
     {

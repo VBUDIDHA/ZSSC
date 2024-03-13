@@ -23,13 +23,10 @@ use etag
 
   use association _KeyDeliver { create; with draft; }
   use association _Leave { create; with draft; }
-  //  use association _POrder { create; with draft; }
-  //  use association _Salary { create; with draft; }
-  //  use association _Department { create; with draft; }
+  use association _POrder { create; with draft; }
+  use association _Salary { create; with draft; }
+  use association _Department { create; with draft; }
 
-  use association _POrder;
-  use association _Salary;
-  use association _Department;
 }
 
 /***********************************************************************************/
@@ -45,6 +42,7 @@ use etag
 
   use association _Employee { with draft; }
 }
+
 
 /***********************************************************************************/
 /* Leaves behavior - Projection */

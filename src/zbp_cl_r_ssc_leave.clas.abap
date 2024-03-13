@@ -1,0 +1,5 @@
+CLASS zbp_cl_r_ssc_leave DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zr_ssc_employee.
+ENDCLASS.
+
+CLASS zbp_cl_r_ssc_leave IMPLEMENTATION.
+ENDCLASS.
