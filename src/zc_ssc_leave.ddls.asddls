@@ -12,6 +12,7 @@ define view entity ZC_SSC_LEAVE
       FromDate,
       ToDate,
       Reason,
+      OverallStatus,
       LastChangedAt,
       
       /* Associations */

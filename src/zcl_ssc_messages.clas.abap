@@ -20,7 +20,16 @@ CLASS zcl_ssc_messages DEFINITION
         attr2 TYPE scx_attrname VALUE 'zlv_no_leaves',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF validate_leaves.
+      END OF validate_leaves,
+
+      BEGIN OF validate_dates,
+        msgid TYPE symsgid VALUE 'ZSSC_MESSAGES',
+        msgno TYPE symsgno VALUE '002',
+        attr1 TYPE scx_attrname VALUE 'zlv_no_days',
+        attr2 TYPE scx_attrname VALUE 'zlv_days_diff',
+        attr3 TYPE scx_attrname VALUE '',
+        attr4 TYPE scx_attrname VALUE '',
+      END OF validate_dates.
 
     METHODS constructor
       IMPORTING

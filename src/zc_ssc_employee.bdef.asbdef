@@ -54,6 +54,8 @@ use etag
 {
   use update;
   use delete;
+  use action acceptleave;
+  use action rejectleave;
 
   use association _Employee { with draft; }
 }

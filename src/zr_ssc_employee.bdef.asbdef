@@ -116,7 +116,7 @@ lock dependent by _Employee
 authorization dependent by _Employee
 
 {
-  field ( readonly ) EmployeeID, LastChangedAt;
+  field ( readonly ) EmployeeID, LastChangedAt, OverallStatus;
 
   field ( mandatory : create )
   LeaveRequest;
@@ -136,13 +136,23 @@ authorization dependent by _Employee
       FromDate         = zz_from_date;
       ToDate           = zz_to_date;
       Reason           = zz_reason;
+      OverallStatus    = zz_status;
       LastChangedAt    = last_changed_at;
     }
 
   association _Employee { with draft; }
 
-   // Validation on Total Available Leaves
+  // Validation on Total Available Leaves
   validation validateleavecount on save { create; field NoDays; }
+
+    //determine weeknumber automatically
+  determination SetOpenStatus on save { create; }
+
+  action acceptleave result [1] $self;
+  action rejectleave result [1] $self;
+
+  // Validation on Dates
+  //  validation validatedates on save { create; field FromDate; field ToDate; }
 }
 
 /***********************************************************************************/
